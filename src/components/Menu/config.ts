@@ -12,11 +12,11 @@ const config: MenuEntry[] = [
     items: [
       {
         label: 'Exchange',
-        href: 'https://exchange.lile.farm/',
+        href: 'http://ec2-34-222-57-153.us-west-2.compute.amazonaws.com:3000/#/swap',
       },
       {
         label: 'Liquidity',
-        href: 'https://exchange.lile.farm/#/pool',
+        href: 'http://ec2-34-222-57-153.us-west-2.compute.amazonaws.com:3000/#/pool',
       },
     ],
   },
