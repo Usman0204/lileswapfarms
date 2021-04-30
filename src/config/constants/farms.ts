@@ -21,15 +21,15 @@ const farms: FarmConfig[] = [
   {
     pid: 0,
     risk: 5,
-    lpSymbol: 'L ́ILE-BNB LP',
+    lpSymbol: 'LILE-BNB LP',
     lpAddresses: {
       97: '',
-      56: '0x793d093FbE43C77253f204e7412d00448Fd9d3A1',
+      56: '0x66611B4a49BCcB11d7Cd0879cAA5931126b1BEDA',
     },
     tokenSymbol: 'LILE',
     tokenAddresses: {
       97: '0x196Cb2e441b03c071c8576d268252e16D9b3D2a8',
-      56: '0x6845f66665e319a7f00a536a15930af90aab2466',
+      56: '0x2E9653D80c8C55577be57a88d9BeF69E24F22432',
     },
     quoteTokenSymbol: QuoteToken.BNB,
     quoteTokenAdresses: contracts.wbnb,
