@@ -49,7 +49,6 @@ const Cards = styled(BaseLayout)`
   ${({ theme }) => theme.mediaQueries.lg} {
     & > div {
       grid-column: span 6;
-      
     }
   }
 `
@@ -63,7 +62,12 @@ const Home: React.FC = () => {
         <Heading as="h1" size="xl" mb="24px" color="secondary">
           {TranslateString(576, 'L ́ile Farm')}
         </Heading>
-        <Text>Farm L ́ile, Official Cryptocurrency of <a href="http://www.theisland.live" rel="noopener noreferrer" target="_blank"><strong> The ISLAND,</strong></a> </Text>
+        <Text>
+          Farm L ́ile, Official Cryptocurrency of{' '}
+          <a href="http://www.theisland.live" rel="noopener noreferrer" target="_blank">
+            <strong> The ISLAND,</strong>
+          </a>{' '}
+        </Text>
         <Text>be a part and as a pioneer of a Brave New World</Text>
         <Text>of Gamified DeFi through NFTs & decentralized Apps</Text>
         <Text>with its own unique elite community of Sky High.</Text>
