@@ -27,6 +27,7 @@ const Hero = styled.div`
     background-position: left center, right center;
     height: 165px;
     padding-top: 0;
+    
   }
 `
 
@@ -58,7 +59,7 @@ const Home: React.FC = () => {
 
   return (
     <Page>
-      <Hero>
+      <Hero onClick={()=> window.open("http://www.theisland.live","_blank")}>
         <Heading as="h1" size="xl" mb="24px" color="secondary">
           {TranslateString(576, 'L ́ile Farm')}
         </Heading>
