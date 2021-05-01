@@ -4,18 +4,12 @@
   "private": true,
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn format",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   },
   "browserslist": {
     "production": [
