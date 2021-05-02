@@ -19,6 +19,7 @@ export interface Ifo {
   releaseBlockNumber: number
 }
 
+
 export enum QuoteToken {
   'BNB' = 'BNB',
   'CAKE' = 'CAKE',
@@ -26,6 +27,8 @@ export enum QuoteToken {
   'BUSD' = 'BUSD',
   'TWT' = 'TWT',
   'UST' = 'UST',
+  'LILE'= 'LILE',
+  ETH = "ETH"
 }
 
 export enum PoolCategory {

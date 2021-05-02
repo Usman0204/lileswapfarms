@@ -7,6 +7,10 @@ import { State, Farm, Pool } from './types'
 import { QuoteToken } from '../config/constants/types'
 
 const ZERO = new BigNumber(0)
+const ZEROPOINT1 = new BigNumber(0.01)
+const SIXSIXTY = new BigNumber(660)
+
+
 
 export const useFetchPublicData = () => {
   const dispatch = useDispatch()
@@ -16,7 +20,14 @@ export const useFetchPublicData = () => {
     // dispatch(fetchPoolsPublicDataAsync())
   }, [dispatch, slowRefresh])
 }
+export const usePriceEthBusd = (): BigNumber => {
+  // const pid = 14 // ETH-BNB LP
+  // const bnbPriceUSD = usePriceBnbBusd()
+  // const farm = useFarmFromPid(pid)
+  // return farm.tokenPriceVsQuote ? bnbPriceUSD.times(farm.tokenPriceVsQuote) : ZERO
+  return ZEROPOINT1
 
+}
 // Farms
 
 export const useFarms = (): Farm[] => {
@@ -68,19 +79,23 @@ export const usePoolFromPid = (sousId): Pool => {
 // Prices
 
 export const usePriceBnbBusd = (): BigNumber => {
-  const pid = 1 // BUSD-BNB LP
-  const farm = useFarmFromPid(pid)
-  return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO
+  // const pid = 1 // BUSD-BNB LP
+  // const farm = useFarmFromPid(pid)
+  // return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : SIXSIXTY
+  return  SIXSIXTY
+
 }
 
 export const usePriceCakeBusd = (): BigNumber => {
-  // const pid = 1 // CAKE-BNB LP
+  // const pid = 0// CAKE-BNB LP
   // const bnbPriceUSD = usePriceBnbBusd()
   // const farm = useFarmFromPid(pid)
-  // return farm.tokenPriceVsQuote ? bnbPriceUSD.times(farm.tokenPriceVsQuote) : ZERO
-  const pid = 0 // LILE-BUSD LP
-  const farm = useFarmFromPid(pid)
-  return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO
+  // return farm.tokenPriceVsQuote ? bnbPriceUSD.times(farm.tokenPriceVsQuote) : ZEROPOINT1
+  return ZEROPOINT1
+
+  // const pid = 2 // LILE-BUSD LP
+  // const farm = useFarmFromPid(pid)
+  // return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO
 }
 
 export const useTotalValue = (): BigNumber => {

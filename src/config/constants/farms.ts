@@ -65,7 +65,23 @@ const farms: FarmConfig[] = [
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
-  }
+  },
+  //  {
+  //   pid: 3,
+  //   risk: 1,
+  //   lpSymbol: 'LILE',
+  //   lpAddresses: {
+  //     97: '',
+  //     56: '0xD77e75C371b277B760b49B62406b24E734cB9500',
+  //   },
+  //   tokenSymbol: 'LILE',
+  //   tokenAddresses: {
+  //     97: '',
+  //     56: '0xD77e75C371b277B760b49B62406b24E734cB9500',
+  //   },
+  //   quoteTokenSymbol: QuoteToken.LILE,
+  //   quoteTokenAdresses: contracts.cake,
+  // }
   /*
   {
     pid: 3,

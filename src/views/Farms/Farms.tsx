@@ -5,10 +5,10 @@ import BigNumber from 'bignumber.js'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { provider } from 'web3-core'
 import { Image, Heading } from '@pancakeswap-libs/uikit'
-import { BLOCKS_PER_YEAR, CAKE_PER_BLOCK, CAKE_POOL_PID } from 'config'
+import { BLOCKS_PER_YEAR, CAKE_PER_BLOCK , CAKE_POOL_PID} from 'config'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
-import { useFarms, usePriceBnbBusd, usePriceCakeBusd } from 'state/hooks'
+import { useFarms, usePriceBnbBusd, usePriceCakeBusd , usePriceEthBusd } from 'state/hooks'
 import useRefresh from 'hooks/useRefresh'
 import { fetchFarmUserDataAsync } from 'state/actions'
 import { QuoteToken } from 'config/constants/types'
@@ -27,6 +27,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const farmsLP = useFarms()
   const cakePrice = usePriceCakeBusd()
   const bnbPrice = usePriceBnbBusd()
+  const ethPriceUsd = usePriceEthBusd()
   const { account, ethereum }: { account: string; ethereum: provider } = useWallet()
   const { tokenMode } = farmsProps
 
@@ -53,28 +54,54 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const farmsList = useCallback(
     (farmsToDisplay, removed: boolean) => {
       // const cakePriceVsBNB = new BigNumber(farmsLP.find((farm) => farm.pid === CAKE_POOL_PID)?.tokenPriceVsQuote || 0)
+      const cakePriceVsBNB = new BigNumber(farmsLP.find((farm) => farm.pid === CAKE_POOL_PID)?.tokenPriceVsQuote || 0)
+
       const farmsToDisplayWithAPY: FarmWithStakedValue[] = farmsToDisplay.map((farm) => {
-        // if (!farm.tokenAmount || !farm.lpTotalInQuoteToken || !farm.lpTotalInQuoteToken) {
-        //   return farm
-        // }
-        const cakeRewardPerBlock = new BigNumber(farm.eggPerBlock || 1)
-          .times(new BigNumber(farm.poolWeight))
-          .div(new BigNumber(10).pow(18))
+        if (!farm.tokenAmount || !farm.lpTotalInQuoteToken) {
+          return farm
+        }
+        const cakeRewardPerBlock = CAKE_PER_BLOCK.times(farm.poolWeight)
         const cakeRewardPerYear = cakeRewardPerBlock.times(BLOCKS_PER_YEAR)
 
-        let apy = cakePrice.times(cakeRewardPerYear)
+        // cakePriceInQuote * cakeRewardPerYear / lpTotalInQuoteToken
+        let apy = cakePriceVsBNB.times(cakeRewardPerYear).div(farm.lpTotalInQuoteToken)
 
-        let totalValue = new BigNumber(farm.lpTotalInQuoteToken || 0)
+        if (farm.quoteTokenSymbol === QuoteToken.BUSD || farm.quoteTokenSymbol === QuoteToken.UST) {
+          apy = cakePriceVsBNB.times(cakeRewardPerYear).div(farm.lpTotalInQuoteToken).times(bnbPrice)
+        } else if (farm.quoteTokenSymbol === QuoteToken.ETH) {
+          apy = cakePrice.div(ethPriceUsd).times(cakeRewardPerYear).div(farm.lpTotalInQuoteToken)
+        } else if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
+          apy = cakeRewardPerYear.div(farm.lpTotalInQuoteToken)
+        } else if (farm.dual) {
+          const cakeApy =
+            farm && cakePriceVsBNB.times(cakeRewardPerBlock).times(BLOCKS_PER_YEAR).div(farm.lpTotalInQuoteToken)
+          const dualApy =
+            farm.tokenPriceVsQuote &&
+            new BigNumber(farm.tokenPriceVsQuote)
+              .times(farm.dual.rewardPerBlock)
+              .times(BLOCKS_PER_YEAR)
+              .div(farm.lpTotalInQuoteToken)
 
+          apy = cakeApy && dualApy && cakeApy.plus(dualApy)
+        }
+
+        let liquidity = farm.lpTotalInQuoteToken
+
+        if (!farm.lpTotalInQuoteToken) {
+          liquidity = null
+        }
         if (farm.quoteTokenSymbol === QuoteToken.BNB) {
-          totalValue = totalValue.times(bnbPrice)
+          liquidity = bnbPrice.times(farm.lpTotalInQuoteToken)
+        }
+        if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
+          liquidity = cakePrice.times(farm.lpTotalInQuoteToken)
         }
 
-        if (totalValue.comparedTo(0) > 0) {
-          apy = apy.div(totalValue)
+        if (farm.quoteTokenSymbol === QuoteToken.ETH) {
+          liquidity = ethPriceUsd.times(farm.lpTotalInQuoteToken)
         }
 
-        return { ...farm, apy }
+        return { ...farm, apy, liquidity }
       })
       return farmsToDisplayWithAPY.map((farm) => (
         <FarmCard
@@ -83,12 +110,11 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           removed={removed}
           bnbPrice={bnbPrice}
           cakePrice={cakePrice}
-          ethereum={ethereum}
           account={account}
         />
       ))
     },
-    [bnbPrice, account, cakePrice, ethereum],
+    [bnbPrice, farmsLP,account, cakePrice , ethPriceUsd],
   )
 
   return (
