@@ -24,12 +24,12 @@ const farms: FarmConfig[] = [
     lpSymbol: 'LILE-BNB LP',
     lpAddresses: {
       97: '',
-      56: '0x66611B4a49BCcB11d7Cd0879cAA5931126b1BEDA',
+      56: '0x5D6cf509b2812A5C96ADB13eF7a76F2A8d3e0D84',
     },
     tokenSymbol: 'LILE',
     tokenAddresses: {
       97: '0x196Cb2e441b03c071c8576d268252e16D9b3D2a8',
-      56: '0x2E9653D80c8C55577be57a88d9BeF69E24F22432',
+      56: '0xD77e75C371b277B760b49B62406b24E734cB9500',
     },
     quoteTokenSymbol: QuoteToken.BNB,
     quoteTokenAdresses: contracts.wbnb,
@@ -40,7 +40,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'BNB-BUSD LP',
     lpAddresses: {
       97: '',
-      56: '0x1b96b92314c44b159149f7e0303511fb2fc4774f',
+      56: '0xbF4c44e1E550aa4a60CC6e613E1f6E2D4364AEd8',
     },
     tokenSymbol: 'BNB',
     tokenAddresses: {
@@ -50,6 +50,22 @@ const farms: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
   },
+  {
+    pid: 2,
+    risk: 3,
+    lpSymbol: 'LILE-BUSD LP',
+    lpAddresses: {
+      97: '',
+      56: '0x1c837c1A92be464E7622998590BaDdA8701fA3a6',
+    },
+    tokenSymbol: 'LILE',
+    tokenAddresses: {
+      97: '',
+      56: '0xD77e75C371b277B760b49B62406b24E734cB9500',
+    },
+    quoteTokenSymbol: QuoteToken.BUSD,
+    quoteTokenAdresses: contracts.busd,
+  }
   /*
   {
     pid: 3,
