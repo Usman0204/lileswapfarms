@@ -28,7 +28,7 @@ const config: MenuEntry[] = [
   {
     label: 'Staking',
     icon: 'PoolIcon',
-    href: '/staking',
+    href: '/pools',
   },
   // {
   //   label: 'Pools',
