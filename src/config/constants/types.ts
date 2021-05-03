@@ -28,6 +28,9 @@ export enum QuoteToken {
   'TWT' = 'TWT',
   'UST' = 'UST',
   'LILE'= 'LILE',
+  'BTCB'= 'BTCB',
+  'USDT'= 'USDT',
+
   ETH = "ETH"
 }
 
