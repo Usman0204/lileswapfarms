@@ -84,7 +84,6 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         //   apy = cakeApy && dualApy && cakeApy.plus(dualApy)
         // }
 
-        console.log('farm amount :::', farm)
         const totalRewardPricePerYear = cakePrice.times(CAKE_PER_BLOCK).times(BLOCKS_PER_YEAR)
         const totalStakingTokenInPool = new BigNumber(100).div(farm.poolWeight)
         let apy = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
