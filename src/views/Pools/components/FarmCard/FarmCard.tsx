@@ -128,7 +128,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
   const earnLabel = farm.dual ? farm.dual.earnLabel : 'LILE'
 
   const farmAPY =
-    farm.apy && farm.apy.times(new BigNumber(100)).toNumber().toLocaleString('en-US', { maximumFractionDigits: 2 })
+    farm.apy && farm.apy.toNumber().toLocaleString('en-US', { maximumFractionDigits: 2 })
 
   // const { quoteTokenAdresses, tokenAddresses } = farm
   // const liquidityUrlPathParts = getLiquidityUrlPathParts({ quoteTokenAdresses, tokenAddresses })

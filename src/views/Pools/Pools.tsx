@@ -60,12 +60,12 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
       const farmsToDisplayWithAPY: FarmWithStakedValue[] = farmsToDisplay.map((farm) => {
         // if (!farm.tokenAmount || !farm.lpTotalInQuoteToken) {
         //   return farm
-        // }
-        const cakeRewardPerBlock = CAKE_PER_BLOCK.times(farm.poolWeight)
-        const cakeRewardPerYear = cakeRewardPerBlock.times(BLOCKS_PER_YEAR)
+        // // }
+        // const cakeRewardPerBlock = CAKE_PER_BLOCK.times(farm.poolWeight)
+        // const cakeRewardPerYear = cakeRewardPerBlock.times(BLOCKS_PER_YEAR)
 
         // cakePriceInQuote * cakeRewardPerYear / lpTotalInQuoteToken
-        const apy = cakePriceVsBNB.times(cakeRewardPerYear)
+        // const apy = cakePriceVsBNB.times(cakeRewardPerYear)
 
         // if (farm.quoteTokenSymbol === QuoteToken.BUSD || farm.quoteTokenSymbol === QuoteToken.UST) {
         //   apy = cakePriceVsBNB.times(cakeRewardPerYear).times(bnbPrice)
@@ -85,10 +85,11 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         // }
 
         console.log('farm amount :::', farm)
-        // const totalRewardPricePerYear = cakePrice.times(CAKE_PER_BLOCK).times(BLOCKS_PER_YEAR)
-        // const totalStakingTokenInPool = new BigNumber(1).times(farm.poolWeight)
-        // let apy = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
-        // apy = apy.isNaN() || !apy.isFinite() ? new BigNumber(0) : apy
+        const totalRewardPricePerYear = cakePrice.times(CAKE_PER_BLOCK).times(BLOCKS_PER_YEAR)
+        const totalStakingTokenInPool = new BigNumber(100).div(farm.poolWeight)
+        let apy = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
+        
+        apy = apy.isNaN() || !apy.isFinite() ? new BigNumber(0) : apy
         // console.log('apy::::', apy)
         return { ...farm, apy }
       })
