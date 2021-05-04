@@ -3,7 +3,7 @@ import { Route, useRouteMatch } from 'react-router-dom'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { Heading } from '@pancakeswap-libs/uikit'
+import { Heading,Image } from '@pancakeswap-libs/uikit'
 import { BLOCKS_PER_YEAR } from 'config'
 import orderBy from 'lodash/orderBy'
 import partition from 'lodash/partition'
@@ -69,18 +69,19 @@ const Farm: React.FC = () => {
     <Page>
       <Hero>
         <div>
-          <Heading as="h1" size="xxl" mb="16px">
-            {TranslateString(282, 'SYRUP Pool')}
+          <Heading as="h1" size="xxl" mb="16px"  style={{ textAlign: 'center' }}>
+            {TranslateString(10002, 'Stake tokens to earn L ́ile')}
           </Heading>
           <ul>
-            <li>{TranslateString(580, 'Stake CAKE to earn new tokens.')}</li>
-            <li>{TranslateString(404, 'You can unstake at any time.')}</li>
-            <li>{TranslateString(406, 'Rewards are calculated per block.')}</li>
+            <li>{TranslateString(10000, 'Deposit Fee will be used to buyback L ́ile')}</li>
+            {/* <li>{TranslateString(320, 'Stake LP tokens to earn L ́ile')}</li> */}
+            {/* <li>{TranslateString(406, 'Rewards are calculated per block.')}</li> */}
           </ul>
         </div>
-        <img src="/images/syrup.png" alt="SYRUP POOL icon" width={410} height={191} />
+        {/* <img src="/images/syrup.png" alt="SYRUP POOL icon" width={410} height={191} /> */}
       </Hero>
       <PoolTabButtons />
+      <div>
       <Divider />
       <FlexLayout>
         <Route exact path={`${path}`}>
@@ -97,6 +98,8 @@ const Farm: React.FC = () => {
           ))}
         </Route>
       </FlexLayout>
+      <Image src="/images/LILE/lile_chest.jpg" alt="illustration" width={1352} height={587} responsive />
+     </div>
     </Page>
   )
 }
