@@ -50,7 +50,7 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
       <Grid>
         <GridItem>
           <Text fontSize="12px" bold color="textSubtle" textTransform="uppercase" mb="20px">
-            {TranslateString(860, 'Timeframe')}
+            {TranslateString(860, 'Time frame')}
           </Text>
         </GridItem>
         <GridItem>
@@ -60,7 +60,7 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
         </GridItem>
         <GridItem>
           <Text fontSize="12px" bold color="textSubtle" textTransform="uppercase" mb="20px">
-            {TranslateString(864, 'CAKE per $1000')}
+            {TranslateString(864, 'Lile per $1000')}
           </Text>
         </GridItem>
         {/* 1 day row */}

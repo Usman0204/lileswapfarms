@@ -33,7 +33,7 @@ const TotalValueLockedCard = () => {
           <Text fontSize="14px">
             {TranslateString(
               999,
-              'Some farms have deposit fee ́s to be used buyback of Lile. 1% of all farmed tokens arranged for the safety and development of the ecosystem.',
+              'Some farms have deposit fee ́s to be used buyback of L´ile. 1% of all farmed tokens arranged for the safety and development of the ecosystem.',
             )}
           </Text>
         </>

@@ -139,7 +139,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           </Route>
         </FlexLayout>
       </div>
-      <Image src="/images/LILE/8.png" alt="illustration" width={1352} height={587} responsive />
+      <Image src="/images/LILE/lile_chest.jpg" alt="illustration" width={1352} height={587} responsive />
     </Page>
   )
 }
