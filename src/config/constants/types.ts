@@ -30,7 +30,7 @@ export enum QuoteToken {
   'LILE'= 'LILE',
   'BTCB'= 'BTCB',
   'USDT'= 'USDT',
-
+  'WBNB'= 'WBNB',
   ETH = "ETH"
 }
 

@@ -82,6 +82,22 @@ const pools: FarmConfig[] = [
     },
     quoteTokenSymbol: QuoteToken.USDT,
     quoteTokenAdresses: contracts.usdt,
+  },
+  {
+    pid: 8,
+    risk: 5,
+    lpSymbol: 'WBNB',
+    lpAddresses: {
+      97: '',
+      56: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+    },
+    tokenSymbol: 'WBNB',
+    tokenAddresses: {
+      97: '',
+      56: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+    },
+    quoteTokenSymbol: QuoteToken.WBNB,
+    quoteTokenAdresses: contracts.wbnb,
   }
   // {
   //   sousId: 3,
