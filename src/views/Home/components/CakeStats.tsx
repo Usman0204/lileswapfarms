@@ -61,7 +61,7 @@ const CakeStats = () => {
           {cakeSupply && <CardValue fontSize="14px" value={cakeSupply} decimals={0} />}
         </Row>
         <Row>
-          <Text fontSize="14px">{TranslateString(540, 'New L ́ILE/block')}</Text>
+          <Text fontSize="14px">{TranslateString(540, 'New LILE/block')}</Text>
           <Text bold fontSize="14px">
             {eggblocks}
           </Text>
