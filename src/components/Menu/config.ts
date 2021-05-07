@@ -7,7 +7,7 @@ const config: MenuEntry[] = [
     href: '/',
   },
    {
-    label: 'Buy Lile',
+    label: 'Buy L`ile',
     icon: 'NftIcon',
     href: '/pools',
   },
