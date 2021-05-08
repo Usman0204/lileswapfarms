@@ -6,6 +6,11 @@ const config: MenuEntry[] = [
     icon: 'HomeIcon',
     href: '/',
   },
+   {
+    label: 'Buy Lile',
+    icon: 'NftIcon',
+    href: '/pools',
+  },
   {
     label: 'Trade',
     icon: 'TradeIcon',
