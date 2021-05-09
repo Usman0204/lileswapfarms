@@ -9,7 +9,7 @@ const config: MenuEntry[] = [
    {
     label: "Buy L ́ile",
     icon: 'NftIcon',
-    href: '/pools',
+    href: 'https://exchange.lile.farm/#/swap?outputCurrency=0xD77e75C371b277B760b49B62406b24E734cB9500',
   },
   {
     label: 'Trade',
