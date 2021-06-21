@@ -3,7 +3,7 @@ import { useCountUp } from 'react-countup'
 import { Text } from '@pancakeswap-libs/uikit'
 
 interface CardValueProps {
-  value: number
+  value: any
   decimals?: number
   fontSize?: string
   prefix?: string

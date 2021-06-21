@@ -24,19 +24,19 @@ export default {
     97: '0x67ADCB4dF3931b0C5Da724058ADC2174a9844412',
   },
   busd: {
-    56: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+    56: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
     97: '',
   },
   btcb: {
-    56: '0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c',
+    56: '0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c',
     97: '',
   },
   eth: {
-    56: '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
+    56: '0x2170Ed0880ac9A755fd29B2688956BD959F933F8',
     97: '',
   },
   usdt: {
-    56: '0x55d398326f99059ff775485246999027b3197955',
+    56: '0x55d398326f99059fF775485246999027B3197955',
     97: '',
   },
 }

@@ -27,7 +27,7 @@ const fetchFarms = async () => {
         },
         // Balance of LP tokens in the master chef contract
         {
-          address: farmConfig.isTokenOnly ? farmConfig.tokenAddresses[CHAIN_ID] : lpAdress,
+          address: lpAdress,
           name: 'balanceOf',
           params: [getMasterChefAddress()],
         },
@@ -69,26 +69,34 @@ const fetchFarms = async () => {
         }
         lpTotalInQuoteToken = tokenAmount.times(tokenPriceVsQuote)
       } else {
-        // Ratio in % a LP tokens that are in staking, vs the total number in circulation
-        const lpTokenRatio = new BigNumber(lpTokenBalanceMC).div(new BigNumber(lpTotalSupply))
 
-        // Total value in staking in quote token value
-        lpTotalInQuoteToken = new BigNumber(quoteTokenBlanceLP)
-          .div(new BigNumber(10).pow(18))
-          .times(new BigNumber(2))
-          .times(lpTokenRatio)
-
-        // Amount of token in the LP that are considered staking (i.e amount of token * lp ratio)
-        tokenAmount = new BigNumber(tokenBalanceLP).div(new BigNumber(10).pow(tokenDecimals)).times(lpTokenRatio)
-        const quoteTokenAmount = new BigNumber(quoteTokenBlanceLP)
-          .div(new BigNumber(10).pow(quoteTokenDecimals))
-          .times(lpTokenRatio)
-
-        if (tokenAmount.comparedTo(0) > 0) {
-          tokenPriceVsQuote = quoteTokenAmount.div(tokenAmount)
+        tokenAmount = new BigNumber(lpTokenBalanceMC).div(new BigNumber(10).pow(tokenDecimals))
+        if (farmConfig.tokenSymbol === QuoteToken.BUSD && farmConfig.quoteTokenSymbol === QuoteToken.BUSD) {
+          tokenPriceVsQuote = new BigNumber(1)
         } else {
           tokenPriceVsQuote = new BigNumber(quoteTokenBlanceLP).div(new BigNumber(tokenBalanceLP))
         }
+        lpTotalInQuoteToken = tokenAmount.times(tokenPriceVsQuote)
+        // Ratio in % a LP tokens that are in staking, vs the total number in circulation
+        // const lpTokenRatio = new BigNumber(lpTokenBalanceMC).div(new BigNumber(lpTotalSupply))
+
+        // // Total value in staking in quote token value
+        // lpTotalInQuoteToken = new BigNumber(quoteTokenBlanceLP)
+        //   .div(new BigNumber(10).pow(18))
+        //   .times(new BigNumber(2))
+        //   .times(lpTokenRatio)
+
+        // // Amount of token in the LP that are considered staking (i.e amount of token * lp ratio)
+        // tokenAmount = new BigNumber(tokenBalanceLP).div(new BigNumber(10).pow(tokenDecimals)).times(lpTokenRatio)
+        // const quoteTokenAmount = new BigNumber(quoteTokenBlanceLP)
+        //   .div(new BigNumber(10).pow(quoteTokenDecimals))
+        //   .times(lpTokenRatio)
+
+        // if (tokenAmount.comparedTo(0) > 0) {
+        //   tokenPriceVsQuote = quoteTokenAmount.div(tokenAmount)
+        // } else {
+        //   tokenPriceVsQuote = new BigNumber(quoteTokenBlanceLP).div(new BigNumber(tokenBalanceLP))
+        // }
       }
 
       const [info, totalAllocPoint, lilePerBlock] = await multicall(masterchefABI, [

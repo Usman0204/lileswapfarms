@@ -1,7 +1,9 @@
 import BigNumber from 'bignumber.js'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import useRefresh from 'hooks/useRefresh'
+import { useWallet } from '@binance-chain/bsc-use-wallet';
+import { provider } from 'web3-core';
 import { fetchFarmsPublicDataAsync, fetchPoolsPublicDataAsync, fetchPoolsUserDataAsync } from './actions'
 import { State, Farm, Pool } from './types'
 import { QuoteToken } from '../config/constants/types'
@@ -131,24 +133,53 @@ export const usePriceCakeBusd = (): BigNumber => {
   // return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO
 }
 
-export const useTotalValue = (): BigNumber => {
-  const farms = useFarms()
+export const useTotalValue = () => {
+  const api = 'https://api.pancakeswap.info/api/tokens';
+  let farms = useFarms()
+  const { account, ethereum }: { account: string; ethereum: provider } = useWallet()
+  const farmsLP = usePools(account)
   const bnbPrice = usePriceBnbBusd()
   const cakePrice = usePriceCakeBusd()
+  const [data, setData] = useState<any | null>(null)
+  farms = farms.concat(farmsLP);
   let value = new BigNumber(0)
+  let price = new BigNumber(1)
   for (let i = 0; i < farms.length; i++) {
     const farm = farms[i]
+    if (data && data.data) {
+      price = data.data[`${farm.quoteTokenAdresses["56"]}`] ? new BigNumber(data.data[`${farm.quoteTokenAdresses["56"]}`].price) : new BigNumber(1)
+    }
     if (farm.lpTotalInQuoteToken) {
       let val
       if (farm.quoteTokenSymbol === QuoteToken.BNB) {
         val = bnbPrice.times(farm.lpTotalInQuoteToken)
-      } else if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
-        val = cakePrice.times(farm.lpTotalInQuoteToken)
+      } else if (farm.quoteTokenSymbol === QuoteToken.LILE) {
+        // val = cakePrice.times(farm.lpTotalInQuoteToken)
       } else {
-        val = farm.lpTotalInQuoteToken
+        val = price.times(farm.lpTotalInQuoteToken)
       }
-      value = value.plus(val)
+
+      if (val) {
+        value = value.plus(val)
+      }
     }
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(api);
+        const res: any = await response.json();
+
+        setData(res);
+      } catch (error) {
+        console.error('Unable to fetch price data:', error)
+      }
+    }
+    fetchData();
+  }, [setData])
+
+
   return value
+
 }
