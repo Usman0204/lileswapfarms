@@ -11,8 +11,8 @@ export const BSC_BLOCK_TIME = 3
 
 export const CAKE_POOL_PID = 0
 
-export const BASE_URL = 'https://exchange/lile.farm/'
-export const BASE_EXCHANGE_URL = 'https://exchange/lile.farm/'
+export const BASE_URL = 'https://exchange.lile.farm/'
+export const BASE_EXCHANGE_URL = 'https://exchange.lile.farm/'
 export const BASE_ADD_LIQUIDITY_URL = `${BASE_EXCHANGE_URL}/#/add`
 export const BASE_LIQUIDITY_POOL_URL = `${BASE_EXCHANGE_URL}/#/pool`
 export const LOTTERY_MAX_NUMBER_OF_TICKETS = 50
