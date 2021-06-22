@@ -5,14 +5,14 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
-export const CAKE_PER_BLOCK = new BigNumber(1)
+export const CAKE_PER_BLOCK = new BigNumber(50)
 export const BLOCKS_PER_YEAR = new BigNumber(10512000)
 export const BSC_BLOCK_TIME = 3
 
 export const CAKE_POOL_PID = 0
 
-export const BASE_URL = 'http://ec2-34-222-57-153.us-west-2.compute.amazonaws.com:3000/'
-export const BASE_EXCHANGE_URL = 'http://ec2-34-222-57-153.us-west-2.compute.amazonaws.com:3000/'
+export const BASE_URL = 'https://exchange/lile.farm/'
+export const BASE_EXCHANGE_URL = 'https://exchange/lile.farm/'
 export const BASE_ADD_LIQUIDITY_URL = `${BASE_EXCHANGE_URL}/#/add`
 export const BASE_LIQUIDITY_POOL_URL = `${BASE_EXCHANGE_URL}/#/pool`
 export const LOTTERY_MAX_NUMBER_OF_TICKETS = 50
