@@ -134,7 +134,7 @@ export const usePriceCakeBusd = (): BigNumber => {
 }
 
 export const useTotalValue = () => {
-  const api = 'https://api.pancakeswap.info/api/tokens';
+  const api = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,BNB&tsyms=USD&api_key=2854a5c3399c288c9183d204216c9c5d706e7d55bb64cd5a67eda10db684a574';
   let farms = useFarms()
   const { account, ethereum }: { account: string; ethereum: provider } = useWallet()
   const farmsLP = usePools(account)
@@ -146,8 +146,16 @@ export const useTotalValue = () => {
   let price = new BigNumber(1)
   for (let i = 0; i < farms.length; i++) {
     const farm = farms[i]
-    if (data && data.data) {
-      price = data.data[`${farm.quoteTokenAdresses["56"]}`] ? new BigNumber(data.data[`${farm.quoteTokenAdresses["56"]}`].price) : new BigNumber(1)
+    if (data && data.ETH && data.BNB && data.BTC) {
+      let tokenSymbol = "";
+      if (farm.quoteTokenSymbol === "ETH") {
+        tokenSymbol = "ETH"
+      } else if (farm.quoteTokenSymbol === "BTCB") {
+        tokenSymbol = "BTC"
+      } else if (farm.quoteTokenSymbol === "WBNB") {
+        tokenSymbol = "BNB"
+      }
+      price = data[`${tokenSymbol}`] ? new BigNumber(data[`${tokenSymbol}`].USD) : new BigNumber(1)
     }
     if (farm.lpTotalInQuoteToken) {
       let val
